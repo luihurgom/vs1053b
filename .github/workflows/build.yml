@@ -29,5 +29,5 @@ jobs:
         with:
           name: vs1053b-chip
           path: |
-            chips/vs1053b/dist/vs1053b.chip.wasm
+            chips/vs1053b/vs1053b.chip.wasm
             chips/vs1053b/vs1053b.chip.json
