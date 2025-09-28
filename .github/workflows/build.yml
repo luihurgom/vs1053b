@@ -7,21 +7,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # (Opcional) lista los archivos para comprobar rutas
       - name: List repo files
         run: ls -R
 
-      - name: Build vs1053b chip
-        uses: wokwi/wokwi-chip-clang-action@main
+      - name: Build vs1053b chip (sources)
+        uses: wokwi/wokwi-chip-clang-action@v1
         with:
-          input: chips/vs1053b.chip.c           # <- ruta correcta del .chip.c
-          output: chips/vs1053b.chip.wasm       # <- dónde quieres el .wasm
-          chip-json: chips/vs1053b.chip.json    # <- ruta del .chip.json
+          # Si tienes un único archivo fuente, también puedes usar 'input: chips/vs1053b/src/main.c'
+          sources: |
+            chips/vs1053b/src/main.c
+          output: chips/vs1053b/dist/vs1053b.chip.wasm
+          chip-json: chips/vs1053b/chip.json
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: vs1053b-chip
           path: |
-            chips/vs1053b.chip.wasm
-            chips/vs1053b.chip.json
+            chips/vs1053b/dist/vs1053b.chip.wasm
+            chips/vs1053b/chip.json
