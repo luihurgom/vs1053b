@@ -13,7 +13,7 @@ jobs:
           ls -R
 
       - name: Build vs1053b chip
-        uses: wokwi/wokwi-chip-clang-action@v1
+        uses: wokwi/wokwi-chip-clang-action@main
         with:
           chip-json: chips/vs1053b/vs1053b.chip.json
           sources: |
