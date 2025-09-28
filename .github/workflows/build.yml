@@ -7,25 +7,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Prepare dist
-        run: mkdir -p chips/vs1053b/dist
+      - name: List repo files (debug)
+        run: |
+          pwd
+          ls -R
 
-      - name: Build vs1053b chip (clang wasi)
-        uses: wokwi/wokwi-chip-clang-action@main
+      - name: Build vs1053b chip
+        uses: wokwi/wokwi-chip-clang-action@v1
         with:
-          sources: |
-            chips/vs1053b/src/main.c
           chip-json: chips/vs1053b/vs1053b.chip.json
-          # Incluye el header vendorizado y fija salida WASM:
-          args: -O3 -I chips/vs1053b/include -o chips/vs1053b/dist/vs1053b.chip.wasm
+          sources: |
+            chips/vs1053b/vs1053b.chip.c
+            chips/vs1053b/src/main.c
+          args: -O3 -I chips/vs1053b/include
 
-      - name: List outputs
-        run: find chips -name "*.chip.*" -print -exec ls -lh {} \;
+      - name: Show build outputs (debug)
+        run: |
+          echo "Wasms found:"
+          find chips -name "*.chip.wasm" -print -exec ls -lh {} \;
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: vs1053b-chip
           path: |
-            chips/vs1053b/dist/vs1053b.chip.wasm
             chips/vs1053b/vs1053b.chip.json
+            chips/vs1053b/vs1053b.chip.wasm
