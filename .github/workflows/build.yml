@@ -17,7 +17,7 @@ jobs:
         with:
           chip-json: chips/vs1053b/vs1053b.chip.json
           sources: |
-            chips/vs1053b/vs1053b.chip.c
+            chips/vs1053b/src/wokwi-api.h
             chips/vs1053b/src/main.c
           args: -O3 -I chips/vs1053b/include
 
