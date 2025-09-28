@@ -11,7 +11,7 @@ jobs:
         run: mkdir -p chips/vs1053b/dist
 
       - name: Build vs1053b chip (clang wasi)
-        uses: wokwi/wokwi-chip-clang-action@v1
+        uses: wokwi/wokwi-chip-clang-action@main
         with:
           sources: |
             chips/vs1053b/src/main.c
