@@ -12,11 +12,16 @@ jobs:
         with:
           chip-json: chips/vs1053b/vs1053b.chip.json
           sources: chips/vs1053b/src/main.c
-          # si necesitas incluir un header fuera del mismo dir del .c, descomenta:
-          # args: -I chips/vs1053b/include
+          # output: chips/vs1053b/vs1053b.chip.wasm  # Descomenta si la opción anterior funciona
 
-      - name: Show outputs
-        run: find chips -maxdepth 2 -name "vs1053b.chip.*" -print -exec ls -lh {} \;
+      - name: Debug - List all files
+        run: |
+          echo "=== Buscando archivos WASM ==="
+          find . -name "*.wasm" -type f | head -20
+          echo "=== Buscando archivos vs1053b ==="
+          find . -name "vs1053b*" -type f | head -20
+          echo "=== Estructura del directorio chips/ ==="
+          find chips/ -type f | head -20
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -25,3 +30,5 @@ jobs:
           path: |
             chips/vs1053b/vs1053b.chip.json
             chips/vs1053b/vs1053b.chip.wasm
+          # Si no encuentra el WASM, sube todo el directorio para debuggear
+          retention-days: 1
