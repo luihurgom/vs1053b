@@ -12,7 +12,7 @@ jobs:
         run: ls -R
 
       - name: Build vs1053b chip
-        uses: wokwi/wokwi-chip-clang-action@v1
+        uses: wokwi/wokwi-chip-clang-action@main
         with:
           input: chips/vs1053b.chip.c           # <- ruta correcta del .chip.c
           output: chips/vs1053b.chip.wasm       # <- dónde quieres el .wasm
