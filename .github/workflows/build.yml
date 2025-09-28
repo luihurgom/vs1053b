@@ -29,6 +29,6 @@ jobs:
           name: vs1053b-chip
           path: |
             chips/vs1053b/vs1053b.chip.json
-            chips/vs1053b/dist/chip.wasm
+            dist/chip.wasm
           # Si no encuentra el WASM, sube todo el directorio para debuggear
           retention-days: 1
