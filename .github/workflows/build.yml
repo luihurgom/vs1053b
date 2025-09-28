@@ -8,5 +8,5 @@ jobs:
       - name: Build chip
         uses: wokwi/wokwi-chip-clang-action@main
         with:
-          input: vs1053b.chip.c
-          output: vs1053b.chip.wasm
+          input: chips/vs1053b.chip.c
+          output: chips/vs1053b.chip.wasm
