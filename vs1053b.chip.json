@@ -1,0 +1,10 @@
+{
+  "name": "VS1053b MP3 Decoder",
+  "author": "Luis Hurtado",
+  "pins": [
+    "GND","VCC",
+    "XRESET","DREQ",
+    "XCS","XDCS",
+    "SCK","MOSI","MISO"
+  ]
+}
