@@ -7,27 +7,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Prepare dist
-        run: mkdir -p chips/vs1053b/dist
-
+      # Compila el chip: entrada única y JSON correcto
       - name: Build vs1053b chip
         uses: wokwi/wokwi-chip-clang-action@main
         with:
-          sources: |
-            chips/vs1053b/src/main.c
-          # Fuerza el nombre/ruta de salida del WASM:
-          args: -o chips/vs1053b/dist/vs1053b.chip.wasm
-          # Apunta al JSON de definición del chip:
+          entryPoint: chips/vs1053b/src/main.c
           chip-json: chips/vs1053b/vs1053b.chip.json
+          # sin args: dejar salida por defecto vs1053b.chip.wasm al lado del JSON
 
-      - name: Show built files (debug)
-        run: |
-          find chips -name "*.chip.*" -print -exec ls -lh {} \;
+      # Ver lo que se generó
+      - name: List outputs
+        run: find chips -maxdepth 3 -type f -name "*.chip.*" -print -exec ls -lh {} \;
 
+      # Sube ambos artefactos
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: vs1053b-chip
-          path: |
-            chips/vs1053b/vs1053b.chip.wasm
-            chips/vs1053b/vs1053b.chip.json
+          path: chips/vs1053b/*.chip.*
