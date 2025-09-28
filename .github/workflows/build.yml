@@ -1,12 +1,27 @@
 name: Build custom chip
 on: [push, workflow_dispatch]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build chip
-        uses: wokwi/wokwi-chip-clang-action@main
+
+      # (Opcional) lista los archivos para comprobar rutas
+      - name: List repo files
+        run: ls -R
+
+      - name: Build vs1053b chip
+        uses: wokwi/wokwi-chip-clang-action@v1
         with:
-          input: chips/vs1053b.chip.c
-          output: chips/vs1053b.chip.wasm
+          input: chips/vs1053b.chip.c           # <- ruta correcta del .chip.c
+          output: chips/vs1053b.chip.wasm       # <- dónde quieres el .wasm
+          chip-json: chips/vs1053b.chip.json    # <- ruta del .chip.json
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: vs1053b-chip
+          path: |
+            chips/vs1053b.chip.wasm
+            chips/vs1053b.chip.json
