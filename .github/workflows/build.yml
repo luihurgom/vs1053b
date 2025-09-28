@@ -11,7 +11,7 @@ jobs:
         run: ls -R
 
       - name: Build vs1053b chip (sources)
-        uses: wokwi/wokwi-chip-clang-action@v1
+        uses: wokwi/wokwi-chip-clang-action@main
         with:
           # Si tienes un único archivo fuente, también puedes usar 'input: chips/vs1053b/src/main.c'
           sources: |
