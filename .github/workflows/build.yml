@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build chip
-        uses: wokwi/wokwi-chip-clang-action@v1
+        uses: wokwi/wokwi-chip-clang-action@main
         with:
           input: vs1053b.chip.c
           output: vs1053b.chip.wasm
